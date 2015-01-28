@@ -6,6 +6,8 @@
 // @grant       none
 // ==/UserScript==
 
+// @version     2 (with chrome extension support)
+
 function arraysEqual(arr1, arr2) {
     if(arr1.length !== arr2.length)
         return false;
@@ -18,19 +20,15 @@ function arraysEqual(arr1, arr2) {
 }
 
 function godeep () {
-//    alert ("hebben we gedaan!");
   var divel  =  document.getElementById("box");
-  //alert(divel.innerHTML);
   var elems = divel.getElementsByTagName('span'), i;
   var color1="", color2="";
   var color1cnt=0, color2cnt=0;
   var color1elem, color2elem;
   var color;
     for (i in elems) {
-      //alert(elems[i].getAttribute('style'));
       data=elems[i].getAttribute('style');
       color = data.split('(')[1].split(')')[0].split(',');
-      //console.log(color);
       if( color1 ==""  || arraysEqual(color1, color) ){
         color1 = color;
         color1cnt++;
@@ -42,16 +40,12 @@ function godeep () {
         color2cnt++;
         color2elem=i;
         }
- //       console.log("new color");
- //       console.log(color);
       }
       if( color1cnt>1 && color2cnt==1){
- //       console.log(color2elem);
         elems[color2elem].click();
         break;
       }
       else if (color2cnt>1 && color1cnt==1){
-//        console.log(color1elem);
         elems[color1elem].click();
         break;
       }
@@ -77,7 +71,6 @@ function addOnclickInContainer(matchClass) {
     for (i in elems) {
         if((' ' + elems[i].className + ' ').indexOf(' ' + matchClass + ' ')
                 > -1) {
-          //  elems[i].innerHTML = content;
           elems[i].addEventListener('click', init, false);
         }
     }
